@@ -1,11 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Product from './Product.js';
+import Title from './Title';
+import PropTypes from 'prop-types';
+// import withData from './hoc';
+import { ProductConsumer } from './context';
 class ProductList extends Component {
   render() {
     return (
-      <div>
-        <Product />
-      </div>
+      <Fragment>
+        <div className="py-5">
+          <div className="container">
+            <Title name="our" title="products" />
+            <div className="row">
+              <ProductConsumer>
+                {data => {
+                  return data.products.map(product => {
+                    return <Product key={product.id} product={product} />;
+                  });
+                }}
+              </ProductConsumer>
+            </div>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
