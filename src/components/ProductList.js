@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Product from './Product.js';
 import Title from './Title';
-import PropTypes from 'prop-types';
 // import withData from './hoc';
 import { ProductConsumer } from './context';
 class ProductList extends Component {
@@ -14,8 +13,11 @@ class ProductList extends Component {
             <div className="row">
               <ProductConsumer>
                 {data => {
+                  const { products, ...rest } = data;
                   return data.products.map(product => {
-                    return <Product key={product.id} product={product} />;
+                    return (
+                      <Product key={product.id} product={product} rest={rest} />
+                    );
                   });
                 }}
               </ProductConsumer>
